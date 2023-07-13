@@ -1,7 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
-import './App.css';
-import games from './games.json';
 
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
@@ -14,14 +11,9 @@ import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2'; 
 import Skeleton from '@mui/material/Skeleton'; 
 
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
-
 const BOOK_API = "https://www.googleapis.com/books/v1/volumes?q=Система";
 
-function App() {
+function Root() {
 
   const [books, setBooks] = useState<any[]>([]);
   useEffect(() => {
@@ -56,10 +48,10 @@ function App() {
           <Typography variant="body2" color="text.secondary" sx={{wordWrap: 'break-word', maxHeight: '200px', overflow: 'hidden'}}>
             Price aviability rating {book.volumeInfo.description}
           </Typography>
+          <Chip label="500 uah" variant="outlined" />
+          <Chip label="aviable" color="success" sx={{ marginLeft: '10px', marginRight: '10px' }} />
+          <Chip label="5⭐"/>
         </CardContent>
-        <Chip label="500 uah" variant="outlined" />
-        <Chip label="aviable" color="success"/>
-        <Chip label="5⭐"/>
         <CardActions>
           <Button size="small">Buy</Button>
         </CardActions>
@@ -72,4 +64,4 @@ function App() {
   );
 }
 
-export default App;
+export default Root;
