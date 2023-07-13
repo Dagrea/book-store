@@ -4,6 +4,7 @@ import Root from './components/Root';
 import Navbar from './components/Navbar';
 import BookCard from './components/BookCard';
 import About from './components/About';
+import Footer from './components/Footer';
 
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom/client';
@@ -43,6 +44,7 @@ root.render(
     router={router}
     fallbackElement={<Skeleton variant="rounded" width={"auto"} height={"100vh"}/> }
   />
+  <Footer/>
   </React.StrictMode>
 );
 

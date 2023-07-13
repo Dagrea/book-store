@@ -45,8 +45,8 @@ function Root() {
           <Typography gutterBottom variant="h5" component="div">
             {book.volumeInfo.title}
           </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{wordWrap: 'break-word', maxHeight: '200px', overflow: 'hidden'}}>
-            Price aviability rating {book.volumeInfo.description}
+          <Typography variant="body1" color="text.secondary" sx={{wordWrap: 'break-word', maxHeight: '200px', overflow: 'hidden'}}>
+            {book.volumeInfo.description}
           </Typography>
           <Chip label="500 uah" variant="outlined" />
           <Chip label="aviable" color="success" sx={{ marginLeft: '10px', marginRight: '10px' }} />
