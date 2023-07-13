@@ -5,11 +5,13 @@ import Navbar from './components/Navbar';
 import BookCard from './components/BookCard';
 import About from './components/About';
 import Footer from './components/Footer';
+import Categories from './components/Categories';
 
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider} from "react-router-dom";
 
+import Container from '@mui/material/Container';
 import Skeleton from '@mui/material/Skeleton'; 
 
 import './index.css';
@@ -23,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+  },
+  {
+   path: "categories",
+   element: <Categories />,
   },
   {
    path: "about",
@@ -40,10 +46,14 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
   <Navbar/>
-  <RouterProvider
+  <Container  sx={{
+            minHeight: '100vh'
+          }}>
+  <RouterProvider 
     router={router}
     fallbackElement={<Skeleton variant="rounded" width={"auto"} height={"100vh"}/> }
   />
+  </Container>
   <Footer/>
   </React.StrictMode>
 );

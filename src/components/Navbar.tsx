@@ -13,8 +13,11 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import PersonIcon from '@mui/icons-material/Person';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['New releases', 'Categories', 'Recommended'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
@@ -37,7 +40,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="sticky" sx={{ width: '100%', marginBottom: '50px'}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -56,7 +59,7 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Readmag
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -90,7 +93,7 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center" component="a" href={"categories"} >{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -112,11 +115,12 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Readmag
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
+              component="a" href={"categories"}
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
@@ -126,11 +130,21 @@ function Navbar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+          <Box sx={{ flexGrow: 0}}>
+          <Tooltip title="Open wishlist">
+             <IconButton onClick={handleOpenUserMenu} sx={{ m: '10px', p: '10px' , background: '#fff'}}> 
+               <FavoriteIcon />
+             </IconButton>
+          </Tooltip>
+            <Tooltip title="Open cart">
+              <IconButton onClick={handleOpenUserMenu} sx={{ m: '10px', p: '10px' , background: '#fff'}}> 
+                <ShoppingCartIcon />
               </IconButton>
+            </Tooltip>
+            <Tooltip title="Open settings">
+             <IconButton onClick={handleOpenUserMenu} sx={{ m: '10px', p: '10px' , background: '#fff'}}> 
+               <PersonIcon />
+             </IconButton>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}
