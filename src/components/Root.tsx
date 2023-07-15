@@ -162,7 +162,7 @@ function Root() {
     <Paper sx={{ width: '50%',display: 'flex', flexDirection: 'column',justifyContent: 'center', alignItems: 'center',backgroundColor: '#e9e9e9'}}>
       <Typography variant='h2' >Read with pleasure</Typography >
       <Typography variant='body1' sx={{ margin: "20px 0px" }} >Read your favorite books in a convenient way for you at any time</Typography >
-      <Button variant="contained">Buy now</Button>
+      <Button variant="contained"  size="large" color="info" sx={{width: '200px'}}>Buy now</Button>
     </Paper>
       </Card>
       </Container>

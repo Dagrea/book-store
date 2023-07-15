@@ -64,9 +64,9 @@ function Navbar() {
     <div style={ sticky ? {width: '100%', height: '70px', backgroundColor: '#427dff', boxShadow: 'rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px'} : {width: '100%', height: '120px', backgroundColor: '#427dff', boxShadow:'rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px'}}>
       <Container maxWidth="xl" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: "row",justifyContent: 'center', alignItems: 'center'}}>
         <Toolbar disableGutters sx={{width: '100%',display: 'flex', flexDirection: "row", flexWrap: 'noWrap', justifyContent: 'space-between', alignItems: 'center'}}>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <AdbIcon fontSize="large"  sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }} />
           <Typography
-            variant="h6"
+            variant="h3"
             noWrap
             component={Link}
             to="/"
