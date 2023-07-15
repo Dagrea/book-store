@@ -7,7 +7,7 @@ import Typography from '@mui/material/Typography';
 
 const Footer = () => (
   
-<Paper sx={{ background: '#0a1929'}} component="footer" square variant="outlined">
+<Paper sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , background: '#0a1929', marginTop: '50px', minHeight: '400px'}} component="footer" square variant="outlined">
       <Container >
         <Box
           sx={{

@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
+import { Link } from 'react-router-dom';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -21,6 +22,25 @@ const pages = ['New releases', 'Categories', 'Recommended'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
+
+
+  const [sticky, setSticky] = useState(false);
+  const handleScroll = () => {
+    if (window.scrollY > 10) {
+      setSticky(true);
+    } else {
+      setSticky(false);
+    }
+  };
+  window.addEventListener("scroll", handleScroll);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -40,15 +60,16 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="sticky" sx={{ width: '100%', marginBottom: '50px'}}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <AppBar position="sticky" sx={{ height: '150px', marginBottom: '50px',boxShadow: 'none', backgroundColor: 'transparent'}}>
+    <div style={ sticky ? {width: '100%', height: '70px', backgroundColor: '#427dff', boxShadow: 'rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px'} : {width: '100%', height: '120px', backgroundColor: '#427dff', boxShadow:'rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px'}}>
+      <Container maxWidth="xl" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: "row",justifyContent: 'center', alignItems: 'center'}}>
+        <Toolbar disableGutters sx={{width: '100%',display: 'flex', flexDirection: "row", flexWrap: 'noWrap', justifyContent: 'space-between', alignItems: 'center'}}>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -93,7 +114,7 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" component="a" href={"categories"} >{page}</Typography>
+                  <Typography textAlign="center" component={Link} to="/categories" >{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -102,8 +123,8 @@ function Navbar() {
           <Typography
             variant="h5"
             noWrap
-            component="a"
-            href=""
+            component={Link}
+            to="/"
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -120,7 +141,7 @@ function Navbar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
-              component="a" href={"categories"}
+              component={Link} to="/categories" 
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
@@ -170,7 +191,8 @@ function Navbar() {
             </Menu>
           </Box>
         </Toolbar>
-      </Container>
+      </Container>     
+    </div>
     </AppBar>
   );
 }

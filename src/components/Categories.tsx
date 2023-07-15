@@ -26,7 +26,7 @@ function Categories() {
 
   return (
     <div className="App">
-    <Container>
+    <Container  sx={{minHeight: '100vh'}}>
     <Grid container spacing={2} >
       {books.length > 0 && books.map((book, index) => (
         <Grid key={index} {...{ xs: 12, sm: 6, md: 4, lg: 3 }} height={'auto'}>
@@ -36,7 +36,6 @@ function Categories() {
         <CardMedia
           sx={{ height: 195, backgroundSize: 'contain' }}
           image={book.volumeInfo.imageLinks.thumbnail}
-          title="book"
         />}
         <CardContent>
           <Typography gutterBottom variant="body1" component="div">
