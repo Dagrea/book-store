@@ -73,7 +73,7 @@ const Footer = () => (
           </Grid>
           <Grid container item xs={12}>
             <Typography variant="body1" color="#fff">
-             Shipping Details 
+             Careers
             </Typography>
           </Grid>
           <Grid container item xs={12}>

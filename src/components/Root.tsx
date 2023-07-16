@@ -114,7 +114,7 @@ function Root() {
       {
         carouselImages.map( (item, i) => (
         <CardMedia
-          sx={{ height: 400, backgroundSize: 'cover' }}
+          sx={{ height: 450, backgroundSize: 'cover' }}
           image={item}
         />
         ) )

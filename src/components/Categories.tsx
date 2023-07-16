@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
@@ -9,6 +10,7 @@ import Button from '@mui/material/Button';
 import Chip from '@mui/material/Chip'; 
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2'; 
+import Pagination from '@mui/material/Pagination'; 
 import Skeleton from '@mui/material/Skeleton'; 
 
 const BOOK_API = "https://www.googleapis.com/books/v1/volumes?q=Garry&maxResults=40";
@@ -25,9 +27,9 @@ function Categories() {
   }, [])
 
   return (
-    <div className="App">
+    <div className="App" >
     <Container  sx={{minHeight: '100vh'}}>
-    <Grid container spacing={2} >
+    <Grid container spacing={2} justifyContent='center'>
       {books.length > 0 && books.map((book, index) => (
         <Grid key={index} {...{ xs: 12, sm: 6, md: 4, lg: 3 }} height={'auto'}>
         <Card sx={{ maxWidth: 345,  minHeight: '100%', position: 'relative' }} >
@@ -36,9 +38,10 @@ function Categories() {
         <CardMedia
           sx={{ height: 195, backgroundSize: 'contain' }}
           image={book.volumeInfo.imageLinks.thumbnail}
+          component={Link} to={'/card/'+index}
         />}
         <CardContent>
-          <Typography gutterBottom variant="body1" component="div">
+          <Typography gutterBottom variant="body1" component={Link} to="/card">
             {book.volumeInfo.title}
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{wordWrap: 'break-word', maxHeight: '200px', overflow: 'hidden'}}>
@@ -58,6 +61,7 @@ function Categories() {
       </Card>
       </Grid>
       ))}
+      <Pagination count={10} />
       </Grid>
       </Container>
     </div>
