@@ -10,6 +10,11 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
+import Chip from '@mui/material/Chip';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
@@ -201,8 +206,28 @@ function Navbar() {
               onClose={handleCloseFavMenu}
             >
               {favorite.items.map((item) => (
-                <MenuItem key={item} onClick={handleCloseFavMenu}>
-                  <Typography textAlign="center">{item}</Typography>
+                <MenuItem key={item.name} onClick={handleCloseFavMenu}>
+                 <Grid container justifyContent="center" alignItems="center">
+                  <Card variant="outlined" sx={{ display: 'flex', flexDirection: "row", alignItems: 'center' , width: 400,  height: 200, borderColor: '#fff', margin: "10px",   padding: '0px' }}>
+                      <CardContent sx={{ width: '250px'}}>
+                      <Typography align='center' noWrap variant='h5' sx={{marginBottom:'20px'}}>
+                        {item.name}
+                      </Typography>
+                      <Typography align='center' variant='body1' sx={{marginBottom:'20px'}}>
+                        Patrick M. Garry
+                      </Typography>
+                      <Grid container justifyContent="space-around" >
+                      <Chip label="500 uah" variant="outlined" sx={{ fontSize: "18px" }} />
+                      <Chip label="aviable" color="success" sx={{ fontSize: "18px" }} />
+                </Grid>
+                    </CardContent>  
+                    <CardMedia
+                       sx={{ height: '200px',width: '150px', backgroundSize: 'cover' }}
+                       image={item.img}
+                       component={Link} to={'/categories'} 
+                      />
+                  </Card>
+                </Grid>
                 </MenuItem>
               ))}
             </Menu>
@@ -224,7 +249,7 @@ function Navbar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center"></Typography>
+                  <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -236,3 +261,35 @@ function Navbar() {
   );
 }
 export default Navbar;
+
+//cart
+/*
+<MenuItem key={item.name} onClick={handleCloseFavMenu}>
+                 <Grid container justifyContent="center" alignItems="center">
+                  <Card variant="outlined" sx={{ display: 'flex', flexDirection: "row", justifyContent: 'space-between', alignItems: 'center' , width: 600,  height: 200, borderColor: '#fff', margin: "10px",   padding: '0px' }}>
+                      <CardContent sx={{ width: '400px'}}>
+                      <Typography variant='h5'>
+                        {item.name}
+                      </Typography>
+                      <Grid container xs={12} sx={{ display: 'flex', flexDirection: "row",  justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Grid >
+                        <Typography variant='body1'>
+                        Price: 125
+                      </Typography>
+                      </Grid>
+                      <Grid>
+                        <Typography variant='body1'>
+                        Total: 346
+                      </Typography>
+                      </Grid>
+                      </Grid>
+                    </CardContent>  
+                    <CardMedia
+                       sx={{ height: '200px',width: '200px', backgroundSize: 'cover' }}
+                       image={item.img}
+                       component={Link} to={'/categories'} 
+                      />
+                  </Card>
+                </Grid>
+                </MenuItem>
+                */

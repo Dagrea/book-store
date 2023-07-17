@@ -31,8 +31,6 @@ import findGenre from '../assets/findgenre.png';
 
 const BOOK_API = "https://www.googleapis.com/books/v1/volumes?q=Garry&maxResults=12";
 
-
-
 function Root() {
 
   const [books, setBooks] = useState<any[]>([]);

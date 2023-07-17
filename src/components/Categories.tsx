@@ -61,7 +61,7 @@ function Categories() {
           <Button size="small">Buy</Button>
         </CardActions>
         <CardActions sx={{ position: 'absolute', bottom: '0', right: '0' }}>
-          <Button onClick={() => dispatch(addItem(book.volumeInfo.title))}  size="small">To favorite</Button>
+          <Button onClick={() => dispatch(addItem({name:book.volumeInfo.title, img:book.volumeInfo.imageLinks.thumbnail}))}  size="small">To favorite</Button>
           <Button size="small">Buy</Button>
         </CardActions>
       </Card>

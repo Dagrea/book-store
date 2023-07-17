@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+import carousel1 from '../assets/carousel1.jpg';
+import carousel2 from '../assets/carousel2.jpg';
+
 export const favoriteSlice = createSlice({
   name: 'favorite',
   initialState: {
-    items: ['book', 'second']
+    items: [{name:'Garry Trudeau', img:carousel1}, {name:'Joan Garry\'s Guide to Nonprofit Leadership', img:carousel2}]
   },
   reducers: {
     addItem(state, action) {

@@ -1,4 +1,8 @@
 import React, {useState, useEffect} from 'react';
+
+import { useAppSelector, useAppDispatch } from '../hooks/redux'
+import { increment, addItem } from '../redux/favorite'
+
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -38,8 +42,12 @@ const RECOMMENDED_BOOK_API = "https://www.googleapis.com/books/v1/volumes?q=Garr
 const POPULAR_BOOK_API = "https://www.googleapis.com/books/v1/volumes?q=Garry&maxResults=12&startIndex=41";
 
 function BookCard () {
-const [recommendedBooks, setRecommendedBooks] = useState<any[]>([]);
-const [populardBooks, setPopulardBooks] = useState<any[]>([]);
+
+  const favorite = useAppSelector(state => state.favorite);
+  const dispatch = useAppDispatch();
+
+  const [recommendedBooks, setRecommendedBooks] = useState<any[]>([]);
+  const [populardBooks, setPopulardBooks] = useState<any[]>([]);
   useEffect(() => {
     fetch(RECOMMENDED_BOOK_API)
       .then((res) => res.json())
@@ -158,7 +166,7 @@ return (
           <Button size="large" endIcon={<FavoriteSharpIcon />} sx={{height:'50px', backgroundColor: '#e5e5e5',color: '#000','&:hover': {
             backgroundColor: '#0D9FD9',
             color: '#fff'
-          },}} >Add to favorite</Button>
+          },}} onClick={() => dispatch(addItem('Book store item'))} >Add to favorite</Button>
           <Button size="large" endIcon={<AddShoppingCartSharpIcon />}  sx={{height:'50px', backgroundColor: '#e5e5e5',color: '#000',
           '&:hover': {
             backgroundColor: '#5F6379',
