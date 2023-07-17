@@ -22,10 +22,10 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 
 const pages = ['New releases', 'Categories', 'Recommended'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -84,7 +84,7 @@ function Navbar() {
     <div style={ sticky ? {width: '100%', height: '70px', backgroundColor: '#427dff', boxShadow: 'rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px'} : {width: '100%', height: '120px', backgroundColor: '#427dff', boxShadow:'rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px'}}>
       <Container maxWidth="xl" sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: "row",justifyContent: 'center', alignItems: 'center'}}>
         <Toolbar disableGutters sx={{width: '100%',display: 'flex', flexDirection: "row", flexWrap: 'noWrap', justifyContent: 'space-between', alignItems: 'center'}}>
-          <AdbIcon fontSize="large"  sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }} />
+          <AutoStoriesIcon fontSize="large"  sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }} />
           <Typography
             variant="h3"
             noWrap
@@ -139,7 +139,7 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+          <AutoStoriesIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap

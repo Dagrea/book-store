@@ -1,6 +1,7 @@
 Book Store
 Book store on React + Redux
 Todo
+ toTop on page useEffect
  localstorage
  cart
  acoount
@@ -9,6 +10,7 @@ Todo
  filter | search | pages on categories
  new releases, recommended pages
  mock page for footer links
+ buyNow page
  styled components
  types
 In Progress
