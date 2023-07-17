@@ -116,7 +116,6 @@ const [populardBooks, setPopulardBooks] = useState<any[]>([]);
     }
   }
 
-
 return (
   <div >
     <Container  sx={{minHeight: '100vh'}}>
@@ -177,13 +176,13 @@ return (
           <Typography align='center' gutterBottom variant="h3" component="div" sx={{marginTop:'100px'}}>
       Recommended for you
     </Typography>
-    <Carousel animation='slide' interval={10000} indicators={false} navButtonsAlwaysVisible={true}  sx={{margin: '50px'}}>
+    <Carousel animation='slide' interval={10000} indicators={false} navButtonsAlwaysVisible={true} height={570} sx={{margin: '50px'}}>
       {ritems}
     </Carousel>
     <Typography align='center' gutterBottom variant="h3" component="div" sx={{marginTop:'50px'}}>
       Popular books
     </Typography>
-    <Carousel animation='slide' interval={10000} indicators={false} navButtonsAlwaysVisible={true}  sx={{margin: '50px'}}>
+    <Carousel animation='slide' interval={10000} indicators={false} navButtonsAlwaysVisible={true} height={570} sx={{margin: '50px'}}>
       {pitems}
     </Carousel>
       </Container>

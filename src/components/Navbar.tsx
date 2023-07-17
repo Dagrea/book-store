@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
+import { useAppSelector, useAppDispatch } from '../hooks/redux'
+import { decrement, increment } from '../redux/favorite'
+
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -12,6 +15,7 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
+import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -23,6 +27,8 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
 
+  const favorite = useAppSelector(state => state.favorite);
+  const dispatch = useAppDispatch();
 
   const [sticky, setSticky] = useState(false);
   const handleScroll = () => {
@@ -43,12 +49,21 @@ function Navbar() {
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [anchorElFav, setAnchorElFav] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
+  };
+
+  const handleOpenFavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElFav(event.currentTarget);
+  };
+
+  const handleCloseFavMenu = () => {
+    setAnchorElFav(null);
   };
 
   const handleCloseNavMenu = () => {
@@ -153,8 +168,10 @@ function Navbar() {
 
           <Box sx={{ flexGrow: 0}}>
           <Tooltip title="Open wishlist">
-             <IconButton onClick={handleOpenUserMenu} sx={{ m: '10px', p: '10px' , background: '#fff'}}> 
+             <IconButton onClick={handleOpenFavMenu} sx={{ m: '10px', p: '10px' , background: '#fff'}}> 
+             <Badge badgeContent={favorite.items.length} color="secondary">
                <FavoriteIcon />
+              </Badge>
              </IconButton>
           </Tooltip>
             <Tooltip title="Open cart">
@@ -167,6 +184,28 @@ function Navbar() {
                <PersonIcon />
              </IconButton>
             </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElFav}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElFav)}
+              onClose={handleCloseFavMenu}
+            >
+              {favorite.items.map((item) => (
+                <MenuItem key={item} onClick={handleCloseFavMenu}>
+                  <Typography textAlign="center">{item}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
@@ -185,7 +224,7 @@ function Navbar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center"></Typography>
                 </MenuItem>
               ))}
             </Menu>

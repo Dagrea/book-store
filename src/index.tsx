@@ -1,15 +1,18 @@
 import React from 'react';
 
+import store from './redux/store'
+import { Provider } from 'react-redux'
+
+import reportWebVitals from './reportWebVitals';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
+
 import Root from './components/Root';
 import Navbar from './components/Navbar';
 import BookCard from './components/BookCard';
 import About from './components/About';
 import Footer from './components/Footer';
 import Categories from './components/Categories';
-
-import reportWebVitals from './reportWebVitals';
-import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
 
 import Container from '@mui/material/Container';
 import Skeleton from '@mui/material/Skeleton'; 
@@ -57,10 +60,12 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
+  <Provider store={store}>
   <RouterProvider 
     router={router}
     fallbackElement={<Skeleton variant="rounded" width={"auto"} height={"100vh"}/> }
   />
+  </Provider>
   </React.StrictMode>
 );
 

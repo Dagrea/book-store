@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
+import { useAppSelector, useAppDispatch } from '../hooks/redux'
+import { increment, addItem } from '../redux/favorite'
+
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -16,6 +19,9 @@ import Skeleton from '@mui/material/Skeleton';
 const BOOK_API = "https://www.googleapis.com/books/v1/volumes?q=Garry&maxResults=40";
 
 function Categories() {
+
+  const favorite = useAppSelector(state => state.favorite);
+  const dispatch = useAppDispatch();
 
   const [books, setBooks] = useState<any[]>([]);
   useEffect(() => {
@@ -38,10 +44,10 @@ function Categories() {
         <CardMedia
           sx={{ height: 195, backgroundSize: 'contain' }}
           image={book.volumeInfo.imageLinks.thumbnail}
-          component={Link} to={'/card/'+index}
+          component={Link} to={'/card/'+ ++index}
         />}
         <CardContent>
-          <Typography gutterBottom variant="body1" component={Link} to="/card">
+          <Typography gutterBottom variant="body1" component={Link} to={'/card/'+ ++index} sx={{textDecoration: "none", color:'inherit'}}>
             {book.volumeInfo.title}
           </Typography>
           <Typography variant="body1" color="text.secondary" sx={{wordWrap: 'break-word', maxHeight: '200px', overflow: 'hidden'}}>
@@ -55,7 +61,7 @@ function Categories() {
           <Button size="small">Buy</Button>
         </CardActions>
         <CardActions sx={{ position: 'absolute', bottom: '0', right: '0' }}>
-          <Button size="small">To favorite</Button>
+          <Button onClick={() => dispatch(addItem(book.volumeInfo.title))}  size="small">To favorite</Button>
           <Button size="small">Buy</Button>
         </CardActions>
       </Card>
