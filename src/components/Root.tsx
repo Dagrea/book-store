@@ -93,11 +93,13 @@ function Root() {
                     component={Link} to={'/card/'+ ++index}
                   />}
                   <CardContent>
-                    <Typography gutterBottom variant="body1" component={Link} to={'/card/'+ ++index} sx={{textDecoration: "none", color:'inherit'}}> 
+                    <Typography  variant="body1" component={Link} to={'/card/'+ ++index} sx={{textDecoration: "none", color:'inherit'}}> 
                       {book.volumeInfo.title}
                     </Typography>
-                    <Chip label="500 uah" variant="outlined" />
-                    <Chip label="aviable" color="success" sx={{ marginLeft: '10px', marginRight: '10px' }} />
+                    <Grid container justifyContent='center'>
+                    <Chip label="500 uah" variant="outlined" sx={{m: '10px',  fontSize: '16px'}}/>
+                    <Chip label="aviable" color="success" sx={{m: '10px', fontSize: '16px'}} />
+                    </Grid>
                   </CardContent>
                 </Card>
               </Grid>
