@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
-import { decrement, increment } from '../redux/favorite'
+import { decrement, increment, deleteItem } from '../redux/favorite'
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -26,6 +26,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+import ClearIcon from '@mui/icons-material/Clear';
 
 const pages = ['New releases', 'Categories', 'Recommended'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -205,8 +206,8 @@ function Navbar() {
               open={Boolean(anchorElFav)}
               onClose={handleCloseFavMenu}
             >
-              {favorite.items.map((item) => (
-                <MenuItem key={item.name} onClick={handleCloseFavMenu}>
+              {favorite.items.length > 0 ? favorite.items.map((item) => (
+                <MenuItem key={item.name}>
                  <Grid container justifyContent="center" alignItems="center">
                   <Card variant="outlined" sx={{ display: 'flex', flexDirection: "row", alignItems: 'center' , width: 400,  height: 200, borderColor: '#fff', margin: "10px",   padding: '0px' }}>
                       <CardContent sx={{ width: '250px'}}>
@@ -219,6 +220,9 @@ function Navbar() {
                       <Grid container justifyContent="space-around" >
                       <Chip label="500 uah" variant="outlined" sx={{ fontSize: "18px" }} />
                       <Chip label="aviable" color="success" sx={{ fontSize: "18px" }} />
+                      <Button onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {dispatch(deleteItem(item.id))}}  size="small">
+                      <ClearIcon />
+                      </Button>
                 </Grid>
                     </CardContent>  
                     <CardMedia
@@ -229,7 +233,13 @@ function Navbar() {
                   </Card>
                 </Grid>
                 </MenuItem>
-              ))}
+              ))
+              : <Grid container justifyContent="center" alignItems="center" sx={{ width: 400,  height: 200 }}>
+              <Typography align='center' noWrap variant='h5' >
+                        Browse in categories
+                      </Typography>
+                </Grid>
+            }
             </Menu>
             <Menu
               sx={{ mt: '45px' }}

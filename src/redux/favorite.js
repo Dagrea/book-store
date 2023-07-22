@@ -6,18 +6,35 @@ import carousel2 from '../assets/carousel2.jpg';
 export const favoriteSlice = createSlice({
   name: 'favorite',
   initialState: {
-    items: [{name:'Garry Trudeau', img:carousel1}, {name:'Joan Garry\'s Guide to Nonprofit Leadership', img:carousel2}]
+    items: [{id: "322", name:'Garry Trudeau', img:carousel1, quantity:1}, {id: "323", name:'Joan Garry\'s Guide to Nonprofit Leadership', img:carousel2, quantity:1}]
   },
   reducers: {
     addItem(state, action) {
-      state.items.push(action.payload)
+      const itemInCart = state.items.find((item) => item.id === action.payload.id);
+      if (itemInCart) {
+        itemInCart.quantity++;
+      } else {
+        state.items.push({ ...action.payload});
+      }
     },
     deleteItem(state, action) {
-      state.items.push(action.payload)
+      console.log(action.payload);
+      state.items = state.items.filter((item) => item.id !== action.payload);
+    },
+    //cart
+     increment(state, action) {
+      const item = state.items.find((item) => item.id === action.payload);
+      item.quantity++;
+    },
+     decrement(state, action) {
+      const item = state.items.find((item) => item.id === action.payload);
+      if (item.quantity !== 1) {
+        item.quantity--;
+      }
     }
   },
 })
 
-export const { increment, decrement, addItem } = favoriteSlice.actions
+export const { increment, decrement, addItem, deleteItem } = favoriteSlice.actions
 
 export default favoriteSlice.reducer

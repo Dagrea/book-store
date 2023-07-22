@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
-import { increment, addItem } from '../redux/favorite'
+import { increment, addItem, deleteItem } from '../redux/favorite'
 
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
@@ -48,6 +48,9 @@ function BookCard () {
 
   const [recommendedBooks, setRecommendedBooks] = useState<any[]>([]);
   const [populardBooks, setPopulardBooks] = useState<any[]>([]);
+
+  const favoriteIds = favorite.items.map((book) => book.id)
+
   useEffect(() => {
     fetch(RECOMMENDED_BOOK_API)
       .then((res) => res.json())
@@ -163,10 +166,22 @@ return (
           <Rating name="read-only" value={5} size="large" readOnly />
           </Grid>
           <Grid container xs={12}  sx={{ display:'flex', justifyContent:'center'}}>
-          <Button size="large" endIcon={<FavoriteSharpIcon />} sx={{height:'50px', backgroundColor: '#e5e5e5',color: '#000','&:hover': {
+          
+          {
+            favoriteIds.includes("322") ? 
+            <Button size="large" endIcon={<FavoriteSharpIcon />} sx={{height:'50px', backgroundColor: '#e5e5e5',color: '#000','&:hover': {
             backgroundColor: '#0D9FD9',
             color: '#fff'
-          },}} onClick={() => dispatch(addItem('Book store item'))} >Add to favorite</Button>
+          }}} onClick={() => dispatch(deleteItem("322"))} >Remove from favorite</Button>
+            :
+            <Button size="large" endIcon={<FavoriteSharpIcon />} sx={{height:'50px', backgroundColor: '#e5e5e5',color: '#000','&:hover': {
+            backgroundColor: '#0D9FD9',
+            color: '#fff'
+          }}} onClick={() => dispatch(addItem({id: "322", name:'Garry Trudeau', img:mockImage1, quantity:1}))} >Add to favorite</Button>
+          }
+
+
+          
           <Button size="large" endIcon={<AddShoppingCartSharpIcon />}  sx={{height:'50px', backgroundColor: '#e5e5e5',color: '#000',
           '&:hover': {
             backgroundColor: '#5F6379',

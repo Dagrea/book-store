@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider, Outlet} from "react-router-dom";
+import { createHashRouter, RouterProvider, Outlet} from "react-router-dom";
 
 import Root from './components/Root';
 import Navbar from './components/Navbar';
@@ -32,7 +32,7 @@ const Layout = ()=>{
   </div>
 }
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Layout />,

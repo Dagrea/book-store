@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
-import { increment, addItem } from '../redux/favorite'
+import { addItem, deleteItem } from '../redux/favorite'
 
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
@@ -24,6 +24,7 @@ function Categories() {
   const dispatch = useAppDispatch();
 
   const [books, setBooks] = useState<any[]>([]);
+  const favoriteIds = favorite.items.map((book) => book.id)
   useEffect(() => {
     fetch(BOOK_API)
       .then((res) => res.json())
@@ -61,7 +62,11 @@ function Categories() {
           <Button size="small">Buy</Button>
         </CardActions>
         <CardActions sx={{ position: 'absolute', bottom: '0', right: '0' }}>
-          <Button onClick={() => dispatch(addItem({name:book.volumeInfo.title, img:book.volumeInfo.imageLinks.thumbnail}))}  size="small">To favorite</Button>
+          {
+            favoriteIds.includes(book.id) ? 
+            <Button onClick={() => dispatch(deleteItem(book.id))}  size="small">From favorite</Button> 
+            :<Button onClick={() => dispatch(addItem({id: book.id, name:book.volumeInfo.title, img:book.volumeInfo.imageLinks.thumbnail}))}  size="small">To favorite</Button>
+          }
           <Button size="small">Buy</Button>
         </CardActions>
       </Card>
