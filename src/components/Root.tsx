@@ -35,6 +35,7 @@ function Root() {
 
   const [books, setBooks] = useState<any[]>([]);
   useEffect(() => {
+     window.scrollTo({ top: 0, behavior: "smooth" });
     fetch(BOOK_API)
       .then((res) => res.json())
       .then((data) => {

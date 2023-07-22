@@ -1,7 +1,6 @@
 Book Store
 Book store on React + Redux
 Todo
- toTop on page useEffect
  localstorage
  cart
  acoount
@@ -16,4 +15,4 @@ Todo
  memorize
  types
 In Progress
- toggle favorite on root, categories and card | add delete favorite button on menu 
+ toTop on page useEffect

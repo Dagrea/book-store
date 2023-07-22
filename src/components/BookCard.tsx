@@ -52,6 +52,7 @@ function BookCard () {
   const favoriteIds = favorite.items.map((book) => book.id)
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     fetch(RECOMMENDED_BOOK_API)
       .then((res) => res.json())
       .then((data) => {

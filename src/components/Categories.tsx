@@ -26,6 +26,7 @@ function Categories() {
   const [books, setBooks] = useState<any[]>([]);
   const favoriteIds = favorite.items.map((book) => book.id)
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
     fetch(BOOK_API)
       .then((res) => res.json())
       .then((data) => {

@@ -46,13 +46,6 @@ function Navbar() {
   };
   window.addEventListener("scroll", handleScroll);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const [anchorElFav, setAnchorElFav] = React.useState<null | HTMLElement>(null);
