@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
-import { increment, addItem, deleteItem } from '../redux/favorite'
+import { addItem as addFavItem, deleteItem as deleteFavItem } from '../redux/favorite'
+import { addItem as addCartItem} from '../redux/cart'
 
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
@@ -44,6 +45,7 @@ const POPULAR_BOOK_API = "https://www.googleapis.com/books/v1/volumes?q=Garry&ma
 function BookCard () {
 
   const favorite = useAppSelector(state => state.favorite);
+  const cart = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
 
   const [recommendedBooks, setRecommendedBooks] = useState<any[]>([]);
@@ -52,7 +54,6 @@ function BookCard () {
   const favoriteIds = favorite.items.map((book: any) => book.id)
 
   useEffect(() => {
-  console.log(favorite.items);
     window.scrollTo({ top: 0, behavior: "smooth" });
     fetch(RECOMMENDED_BOOK_API)
       .then((res) => res.json())
@@ -174,26 +175,23 @@ return (
             <Button size="large" endIcon={<FavoriteSharpIcon />} sx={{height:'50px', backgroundColor: '#e5e5e5',color: '#000','&:hover': {
             backgroundColor: '#0D9FD9',
             color: '#fff'
-          }}} onClick={() => dispatch(deleteItem("322"))} >Remove from favorite</Button>
+          }}} onClick={() => dispatch(deleteFavItem("322"))} >Remove from favorite</Button>
             :
             <Button size="large" endIcon={<FavoriteSharpIcon />} sx={{height:'50px', backgroundColor: '#e5e5e5',color: '#000','&:hover': {
             backgroundColor: '#0D9FD9',
             color: '#fff'
-          }}} onClick={() => dispatch(addItem({id: "322", name:'Garry Trudeau', img:mockImage1, quantity:1}))} >Add to favorite</Button>
+          }}} onClick={() => dispatch(addFavItem({id: "322", name:'Garry Trudeau', img:mockImage1}))} >Add to favorite</Button>
           }
-
-
-          
           <Button size="large" endIcon={<AddShoppingCartSharpIcon />}  sx={{height:'50px', backgroundColor: '#e5e5e5',color: '#000',
           '&:hover': {
             backgroundColor: '#5F6379',
             color: '#fff'
           }
-        }}>Add to cart</Button>
+        }} onClick={() => dispatch(addCartItem({id: "322", name:'Garry Trudeau', img:mockImage1, quantity:1, price:777}))} >Add to cart</Button>
           <Button size="large"  endIcon={<AddCardSharpIcon />} sx={{height:'50px', backgroundColor: '#e5e5e5',color: '#000','&:hover': {
             backgroundColor: '#DD226F',
             color: '#fff'
-          },}}>Buy now</Button>
+          },}} >Buy now</Button>
           </Grid>
           </Grid>
           </Grid>

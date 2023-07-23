@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
-import { decrement, increment, deleteItem } from '../redux/favorite'
+import { deleteItem as deleteFavoriteItem } from '../redux/favorite'
+import { increment, decrement, deleteItem as deleteCartItem } from '../redux/cart'
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -34,10 +35,8 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function Navbar() {
 
   const favorite = useAppSelector(state => state.favorite);
+  const cart = useAppSelector(state => state.cart);
   const dispatch = useAppDispatch();
-
-  const state = useAppSelector(state => state);
-  console.log(state);
 
   const [sticky, setSticky] = useState(false);
   const handleScroll = () => {
@@ -50,28 +49,33 @@ function Navbar() {
   window.addEventListener("scroll", handleScroll);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const [anchorElFav, setAnchorElFav] = React.useState<null | HTMLElement>(null);
+  const [anchorElCart, setAnchorElCart] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenFavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElFav(event.currentTarget);
+  };
+
+  const handleOpenCartMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElCart(event.currentTarget);
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleOpenFavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElFav(event.currentTarget);
-  };
-
-  const handleCloseFavMenu = () => {
-    setAnchorElFav(null);
-  };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
+  const handleCloseFavMenu = () => {
+    setAnchorElFav(null);
+  };
+  const handleCloseCartMenu = () => {
+    setAnchorElCart(null);
+  };
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
@@ -177,8 +181,10 @@ function Navbar() {
              </IconButton>
           </Tooltip>
             <Tooltip title="Open cart">
-              <IconButton onClick={handleOpenUserMenu} sx={{ m: '10px', p: '10px' , background: '#fff'}}> 
+              <IconButton onClick={handleOpenCartMenu} sx={{ m: '10px', p: '10px' , background: '#fff'}}> 
+              <Badge badgeContent={cart.items.length} color="secondary">
                 <ShoppingCartIcon />
+              </Badge>
               </IconButton>
             </Tooltip>
             <Tooltip title="Open settings">
@@ -216,7 +222,7 @@ function Navbar() {
                       <Grid container justifyContent="space-around" >
                       <Chip label="500 uah" variant="outlined" sx={{ fontSize: "18px" }} />
                       <Chip label="aviable" color="success" sx={{ fontSize: "18px" }} />
-                      <Button onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {dispatch(deleteItem(item.id))}}  size="small">
+                      <Button onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {dispatch(deleteFavoriteItem(item.id))}}  size="small">
                       <ClearIcon />
                       </Button>
                 </Grid>
@@ -224,7 +230,58 @@ function Navbar() {
                     <CardMedia
                        sx={{ height: '200px',width: '150px', backgroundSize: 'cover' }}
                        image={item.img}
-                       component={Link} to={'/categories'} 
+                       component={Link} to={'/card/'+item.id} 
+                      />
+                  </Card>
+                </Grid>
+                </MenuItem>
+              ))
+              : <Grid container justifyContent="center" alignItems="center" sx={{ width: 400,  height: 200 }}>
+              <Typography align='center' noWrap variant='h5' >
+                        Browse in categories
+                      </Typography>
+                </Grid>
+            }
+            </Menu>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElCart}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElCart)}
+              onClose={handleCloseCartMenu}
+            >
+              {cart.items.length > 0 ? cart.items.map((item: any) => (
+                <MenuItem key={item.name}>
+                 <Grid container justifyContent="center" alignItems="center">
+                  <Card variant="outlined" sx={{ display: 'flex', flexDirection: "row", alignItems: 'center' , width: 400,  height: 200, borderColor: '#fff', margin: "10px",   padding: '0px' }}>
+                      <CardContent sx={{ width: '250px'}}>
+                      <Typography align='center' noWrap variant='h5' sx={{marginBottom:'20px'}}>
+                        {item.name}
+                      </Typography>
+                      <Typography align='center' variant='body1' sx={{marginBottom:'20px'}}>
+                        Patrick M. Garry
+                      </Typography>
+                      <Grid container justifyContent="space-around" >
+                      <Chip label={item.price+" uah"} variant="outlined" sx={{ fontSize: "18px" }} />
+                      <Chip label="aviable" color="success" sx={{ fontSize: "18px" }} />
+                      <Button onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {dispatch(deleteCartItem(item.id))}}  size="small">
+                      <ClearIcon />
+                      </Button>
+                </Grid>
+                    </CardContent>  
+                    <CardMedia
+                       sx={{ height: '200px',width: '150px', backgroundSize: 'cover' }}
+                       image={item.img}
+                       component={Link} to={'/card/'+item.id} 
                       />
                   </Card>
                 </Grid>

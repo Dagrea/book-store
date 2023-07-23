@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../hooks/redux'
-import { addItem, deleteItem } from '../redux/favorite'
+import { addItem as addFavItem, deleteItem as deleteFavItem } from '../redux/favorite'
+import { addItem as addCartItem } from '../redux/cart'
 
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
@@ -55,7 +56,7 @@ function Categories() {
           <Typography variant="body1" color="text.secondary" sx={{wordWrap: 'break-word', maxHeight: '200px', overflow: 'hidden'}}>
             {book.volumeInfo.authors[0]}
           </Typography>
-          <Chip label="500 uah" variant="outlined" />
+          <Chip label={book.volumeInfo.pageCount+" uah"} variant="outlined" />
           <Chip label="aviable" color="success" sx={{ marginLeft: '10px', marginRight: '10px' }} />
           <Chip label="5⭐"/>
         </CardContent>
@@ -65,10 +66,10 @@ function Categories() {
         <CardActions sx={{ position: 'absolute', bottom: '0', right: '0' }}>
           {
             favoriteIds.includes(book.id) ? 
-            <Button onClick={() => dispatch(deleteItem(book.id))}  size="small">From favorite</Button> 
-            :<Button onClick={() => dispatch(addItem({id: book.id, name:book.volumeInfo.title, img:book.volumeInfo.imageLinks.thumbnail}))}  size="small">To favorite</Button>
+            <Button onClick={() => dispatch(deleteFavItem(book.id))}  size="small">From favorite</Button> 
+            :<Button onClick={() => dispatch(addFavItem({id: book.id, name:book.volumeInfo.title, img:book.volumeInfo.imageLinks.thumbnail}))}  size="small">To favorite</Button>
           }
-          <Button size="small">Buy</Button>
+          <Button onClick={() => dispatch(addCartItem({id: book.id, name:book.volumeInfo.title, img:book.volumeInfo.imageLinks.thumbnail, quantity:1, price:book.volumeInfo.pageCount }))} size="small">Buy</Button>
         </CardActions>
       </Card>
       </Grid>

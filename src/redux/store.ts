@@ -1,9 +1,14 @@
 import { configureStore, MiddlewareAPI, PayloadAction, PreloadedState, StateFromReducersMapObject } from '@reduxjs/toolkit'
 
 import favoriteReducer from './favorite'
+import cartReducer from './cart'
+
+import {initialState as initialFavoriteState}  from './favorite'
+import {initialState as initialCartState}  from './cart'
 
 const reducer = {
-  favorite: favoriteReducer
+  favorite: favoriteReducer,
+  cart: cartReducer
 };
 
 const favoriteMiddleware = (store: any) => (next: any) => (action: PayloadAction<string>) => {
@@ -15,22 +20,43 @@ const favoriteMiddleware = (store: any) => (next: any) => (action: PayloadAction
   return result;
 };
 
-const refreshStore = () => {
-  return JSON.parse(localStorage.getItem('favorite') || '{}')
+const refreshFavorite = () => {
+  const storageData = localStorage.getItem('favorite');
+  if ( storageData !== null) {
+    return JSON.parse(storageData);
+  }
+  return initialFavoriteState
+};
+
+const cartMiddleware = (store: any) => (next: any) => (action: PayloadAction<string>) => {
+  const result = next(action);
+  if ( action.type?.startsWith('cart/') ) {
+    const cartState = store.getState().cart;
+    localStorage.setItem('cart', JSON.stringify(cartState ))
+  }
+  return result;
+};
+
+const refreshCart = () => {
+  const storageData = localStorage.getItem('cart');
+  if ( storageData !== null) {
+    return JSON.parse(storageData);
+  }
+  return initialCartState
 };
 
 export type  preloadedRootState = StateFromReducersMapObject<typeof reducer>
 
 const preloadedState: PreloadedState<preloadedRootState> = {
-  favorite: refreshStore(),
-  
+  favorite: refreshFavorite(),
+  cart: refreshCart()
 }
-console.log(preloadedState);
+
 const store = configureStore({
   reducer,
   preloadedState,
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(favoriteMiddleware),
+    getDefaultMiddleware().concat(favoriteMiddleware).concat(cartMiddleware),
 })
 
 export default store
