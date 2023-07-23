@@ -32,7 +32,7 @@ import findGenre from '../assets/findgenre.png';
 const BOOK_API = "https://www.googleapis.com/books/v1/volumes?q=Garry&maxResults=12";
 
 function Root() {
-
+  
   const [books, setBooks] = useState<any[]>([]);
   useEffect(() => {
      window.scrollTo({ top: 0, behavior: "smooth" });
@@ -82,7 +82,7 @@ function Root() {
   for (let i = 0; i < books.length; i += sliderItems) {
     if (i % sliderItems === 0) {
       items.push(
-        <Grid container spacing={2} >
+        <Grid container spacing={2} key={i} >
             {books.slice(i, i + sliderItems).map((book, index) => (
              <Grid key={index} {...{ xs: 12, sm: 6, md: 4, lg: 3 }} height={'570px'}>
                 <Card sx={{ maxWidth: 345,  minHeight: '100%', position: 'relative', boxShadow: 3 }} variant="outlined" >
@@ -118,7 +118,7 @@ function Root() {
         carouselImages.map( (item, i) => (
         <CardMedia
           sx={{ height: 450, backgroundSize: 'cover' }}
-          image={item}
+          image={item} key={i}
         />
         ) )
       }
@@ -137,7 +137,7 @@ function Root() {
     <Grid container justifyContent="center" alignItems="center" sx={{ width: '80%', padding: '30px 0px' }} >
     {
         genres.map( (genre, i) => (
-          <Grid container justifyContent="center" alignItems="center" xs={4} >
+          <Grid container justifyContent="center" alignItems="center" xs={4} key={i} >
         <Card variant="outlined" sx={{ display: 'flex', flexDirection: "column", justifyContent: 'center', alignItems: 'center' , width: 350,  minHeight: 350, backgroundColor: '#000', borderColor: '#fff', margin: "10px",   padding: '0px' }}>
       <CardContent >
         <Paper sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff',minHeight: '250px',width: '250px',  marginBottom: '15px', padding: '5px' }}>

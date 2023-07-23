@@ -1,8 +1,6 @@
 Book Store
 Book store on React + Redux
 Todo
- localstorage
- cart
  acoount
  moduling
  change api to storerestapi.com
@@ -15,4 +13,4 @@ Todo
  memorize
  types
 In Progress
- toTop on page useEffect
+ cart

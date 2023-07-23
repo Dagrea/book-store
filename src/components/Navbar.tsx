@@ -36,6 +36,9 @@ function Navbar() {
   const favorite = useAppSelector(state => state.favorite);
   const dispatch = useAppDispatch();
 
+  const state = useAppSelector(state => state);
+  console.log(state);
+
   const [sticky, setSticky] = useState(false);
   const handleScroll = () => {
     if (window.scrollY > 10) {
@@ -199,7 +202,7 @@ function Navbar() {
               open={Boolean(anchorElFav)}
               onClose={handleCloseFavMenu}
             >
-              {favorite.items.length > 0 ? favorite.items.map((item) => (
+              {favorite.items.length > 0 ? favorite.items.map((item: any) => (
                 <MenuItem key={item.name}>
                  <Grid container justifyContent="center" alignItems="center">
                   <Card variant="outlined" sx={{ display: 'flex', flexDirection: "row", alignItems: 'center' , width: 400,  height: 200, borderColor: '#fff', margin: "10px",   padding: '0px' }}>

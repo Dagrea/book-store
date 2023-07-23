@@ -48,10 +48,11 @@ function BookCard () {
 
   const [recommendedBooks, setRecommendedBooks] = useState<any[]>([]);
   const [populardBooks, setPopulardBooks] = useState<any[]>([]);
-
-  const favoriteIds = favorite.items.map((book) => book.id)
+  
+  const favoriteIds = favorite.items.map((book: any) => book.id)
 
   useEffect(() => {
+  console.log(favorite.items);
     window.scrollTo({ top: 0, behavior: "smooth" });
     fetch(RECOMMENDED_BOOK_API)
       .then((res) => res.json())
@@ -72,7 +73,7 @@ function BookCard () {
   for (let i = 0; i < recommendedBooks.length; i += rsliderItems) {
     if (i % rsliderItems === 0) {
       ritems.push(
-        <Grid container spacing={2} >
+        <Grid container spacing={2} key={i} >
             {recommendedBooks.slice(i, i + rsliderItems).map((book, index) => (
              <Grid key={index} {...{ xs: 12, sm: 6, md: 4, lg: 3 }} height={'570px'}>
                 <Card sx={{ maxWidth: 345,  minHeight: '100%', position: 'relative', boxShadow: 3 }} variant="outlined" >
@@ -103,7 +104,7 @@ function BookCard () {
   for (let i = 0; i < populardBooks.length; i += psliderItems) {
     if (i % psliderItems === 0) {
       pitems.push(
-        <Grid container spacing={2} >
+        <Grid container spacing={2} key={i} >
             {populardBooks.slice(i, i + psliderItems).map((book, index) => (
              <Grid key={index} {...{ xs: 12, sm: 6, md: 4, lg: 3 }} height={'570px'}>
                 <Card sx={{ maxWidth: 345,  minHeight: '100%', position: 'relative', boxShadow: 3 }} variant="outlined" >
@@ -137,7 +138,7 @@ return (
     <Carousel autoPlay={false} navButtonsAlwaysVisible swipe={false} IndicatorIcon={anArrayOfNumbers} sx={{ width: '100%'}} >
       {
         mockCarouselImages.map( (item, i) => (
-          <div style={{ display:'flex', justifyContent:'center'}}>
+          <div key={i} style={{ display:'flex', justifyContent:'center'}}>
        <Zoom  zoomScale={4} width={480} height={600} img={item}
         />
         </div>

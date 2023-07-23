@@ -23,7 +23,7 @@ const Footer = () => (
 <Paper sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' , background: '#0a1929', marginTop: '50px', minHeight: '500px'}} component="footer" square variant="outlined">
       <Container >
        <Grid container >
-       <Grid container xs={3} spacing={1} >
+       <Grid container item xs={3} spacing={1} >
        <Grid container item xs={12}>
             <Typography variant="h5" color="#427dff" >
              For clients
@@ -55,7 +55,7 @@ const Footer = () => (
             </Typography>
           </Grid>
           </Grid>
-          <Grid container xs={3} spacing={2}>
+          <Grid container item xs={3} spacing={2}>
           <Grid container item xs={12}>
             <Typography variant="h5" color="#427dff">
              Information
@@ -87,8 +87,8 @@ const Footer = () => (
           </Typography>
           </Grid>
           </Grid>
-          <Grid container xs={3} spacing={2}>
-          <Grid container xs={10}>
+          <Grid container item xs={3} spacing={2}>
+          <Grid container item xs={10}>
           <Grid container item xs={12}>
             <Typography variant="h5" color="#427dff">
              Contacts
@@ -124,14 +124,14 @@ const Footer = () => (
           <Divider orientation="vertical" flexItem sx={{borderColor: '#fff', minHeight: '100%'}}/>
           </Grid>
           </Grid>
-          <Grid container xs={3} spacing={1} justifyContent="center" >
+          <Grid container item xs={3} spacing={1} justifyContent="center" >
           <Typography variant="h4" color="#fff">
           Newsletter
           </Typography>
           <TextField id="filled-basic" label="Enter your e-mail" variant="filled" fullWidth sx={{input: { backgroundColor: '#fff', fontSize: '15px', }}}/>
           <Button variant="contained"  size="medium" color="info" sx={{width: '100%', height: '50px'}}>Subscibe</Button>
           </Grid>
-          <Grid container xs={12} justifyContent="center" sx={{marginTop: '50px'}}>
+          <Grid container item xs={12} justifyContent="center" sx={{marginTop: '50px'}}>
           <Divider sx={{borderColor: '#fff', minHeight:'1px', minWidth: '100%'}}/>
           <Typography align='right' variant="body1" color="#fff"  sx={{marginTop: '50px'}}>
            Copyright © 2023. All rights are reserved

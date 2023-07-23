@@ -24,7 +24,7 @@ function Categories() {
   const dispatch = useAppDispatch();
 
   const [books, setBooks] = useState<any[]>([]);
-  const favoriteIds = favorite.items.map((book) => book.id)
+  const favoriteIds = favorite.items.map((book: any) => book.id)
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     fetch(BOOK_API)
@@ -39,7 +39,7 @@ function Categories() {
     <Container  sx={{minHeight: '100vh'}}>
     <Grid container spacing={2} justifyContent='center'>
       {books.length > 0 && books.map((book, index) => (
-        <Grid key={index} {...{ xs: 12, sm: 6, md: 4, lg: 3 }} height={'auto'}>
+        <Grid key={book.id} {...{ xs: 12, sm: 6, md: 4, lg: 3 }} height={'auto'}>
         <Card sx={{ maxWidth: 345,  minHeight: '100%', position: 'relative' }} >
         {book.volumeInfo.imageLinks === undefined ? 
         <Skeleton variant="rounded" width={"auto"} height={195}/>  :
