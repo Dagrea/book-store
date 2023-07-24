@@ -28,6 +28,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PersonIcon from '@mui/icons-material/Person';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import ClearIcon from '@mui/icons-material/Clear';
+import RemoveIcon from '@mui/icons-material/Remove';
+import AddIcon from '@mui/icons-material/Add';
 
 const pages = ['New releases', 'Categories', 'Recommended'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -222,10 +224,12 @@ function Navbar() {
                       <Grid container justifyContent="space-around" >
                       <Chip label="500 uah" variant="outlined" sx={{ fontSize: "18px" }} />
                       <Chip label="aviable" color="success" sx={{ fontSize: "18px" }} />
+                      </Grid>
+                      <Grid container justifyContent="end" alignItems="center">
                       <Button onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {dispatch(deleteFavoriteItem(item.id))}}  size="small">
                       <ClearIcon />
                       </Button>
-                </Grid>
+                      </Grid>
                     </CardContent>  
                     <CardMedia
                        sx={{ height: '200px',width: '150px', backgroundSize: 'cover' }}
@@ -260,28 +264,51 @@ function Navbar() {
               onClose={handleCloseCartMenu}
             >
               {cart.items.length > 0 ? cart.items.map((item: any) => (
-                <MenuItem key={item.name}>
+                <MenuItem key={item.name} onClick={handleCloseFavMenu}>
                  <Grid container justifyContent="center" alignItems="center">
-                  <Card variant="outlined" sx={{ display: 'flex', flexDirection: "row", alignItems: 'center' , width: 400,  height: 200, borderColor: '#fff', margin: "10px",   padding: '0px' }}>
-                      <CardContent sx={{ width: '250px'}}>
-                      <Typography align='center' noWrap variant='h5' sx={{marginBottom:'20px'}}>
+                  <Card variant="outlined" sx={{ display: 'flex', flexDirection: "row", justifyContent: 'space-between', alignItems: 'center' , width: 400,  height: 200, borderColor: '#fff', margin: "10px",   padding: '0px' }}>
+                      <CardContent sx={{ width: '400px'}}>
+                      <Typography variant='h5'>
                         {item.name}
                       </Typography>
                       <Typography align='center' variant='body1' sx={{marginBottom:'20px'}}>
                         Patrick M. Garry
                       </Typography>
-                      <Grid container justifyContent="space-around" >
-                      <Chip label={item.price+" uah"} variant="outlined" sx={{ fontSize: "18px" }} />
-                      <Chip label="aviable" color="success" sx={{ fontSize: "18px" }} />
-                      <Button onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {dispatch(deleteCartItem(item.id))}}  size="small">
+                      <Grid container>
+                      <Grid container item xs={6} sx={{ display: 'flex', flexWrap: "noWrap", flexDirection: "row",  justifyContent: 'center', alignItems: 'center' }}>
+                        <Button onClick={() => {dispatch(decrement(item.id))}} >
+                        <RemoveIcon />
+                        </Button>
+                        <Typography variant='body1'>
+                        {item.quantity}
+                      </Typography>
+                      <Button onClick={() => {dispatch(increment(item.id))}} >
+                        <AddIcon />
+                        </Button>
+                      </Grid>
+                      <Grid container item xs={6} sx={{ display: 'flex', flexDirection: "column",  justifyContent: 'space-between', alignItems: 'center' }}>
+                        <Grid >
+                        <Typography variant='body1'>
+                        Price: {item.price}
+                      </Typography>
+                      </Grid>
+                      <Grid>
+                        <Typography variant='body1'>
+                        Total: {item.price * item.quantity}
+                      </Typography>
+                      </Grid>
+                      </Grid>
+                      <Grid container justifyContent="end" alignItems="center">
+                      <Button onClick={() => {dispatch(deleteCartItem(item.id))}}  size="small">
                       <ClearIcon />
                       </Button>
-                </Grid>
+                      </Grid>
+                      </Grid>
                     </CardContent>  
                     <CardMedia
-                       sx={{ height: '200px',width: '150px', backgroundSize: 'cover' }}
+                       sx={{ height: '200px',width: '200px', backgroundSize: 'cover' }}
                        image={item.img}
-                       component={Link} to={'/card/'+item.id} 
+                       component={Link} to={'/categories'} 
                       />
                   </Card>
                 </Grid>
@@ -324,35 +351,3 @@ function Navbar() {
   );
 }
 export default Navbar;
-
-//cart
-/*
-<MenuItem key={item.name} onClick={handleCloseFavMenu}>
-                 <Grid container justifyContent="center" alignItems="center">
-                  <Card variant="outlined" sx={{ display: 'flex', flexDirection: "row", justifyContent: 'space-between', alignItems: 'center' , width: 600,  height: 200, borderColor: '#fff', margin: "10px",   padding: '0px' }}>
-                      <CardContent sx={{ width: '400px'}}>
-                      <Typography variant='h5'>
-                        {item.name}
-                      </Typography>
-                      <Grid container xs={12} sx={{ display: 'flex', flexDirection: "row",  justifyContent: 'space-between', alignItems: 'center' }}>
-                        <Grid >
-                        <Typography variant='body1'>
-                        Price: 125
-                      </Typography>
-                      </Grid>
-                      <Grid>
-                        <Typography variant='body1'>
-                        Total: 346
-                      </Typography>
-                      </Grid>
-                      </Grid>
-                    </CardContent>  
-                    <CardMedia
-                       sx={{ height: '200px',width: '200px', backgroundSize: 'cover' }}
-                       image={item.img}
-                       component={Link} to={'/categories'} 
-                      />
-                  </Card>
-                </Grid>
-                </MenuItem>
-                */
