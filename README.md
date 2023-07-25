@@ -1,6 +1,6 @@
 # Readmag
 
-Live Demo 👉 [Readmag demo](https://www.google.com)
+Live Demo 👉 [Readmag demo](https://dagrea.github.io/book-store/)
 
 ### Build with:
 
