@@ -21,3 +21,5 @@ Spagetti code
 ### Thanks
 
 Your attention is very important to me
+
+![project image](https://github.com/Dagrea/alexzhura/blob/main/src/assets/project2.png "Home page")
