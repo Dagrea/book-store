@@ -2,7 +2,6 @@ Book Store
 Book store on React + Redux
 Todo
  acoount
- moduling
  change api to storerestapi.com
  jws
  filter | search | pages on categories
@@ -13,4 +12,4 @@ Todo
  memorize
  types
 In Progress
- cart
+ moduling / prettier
