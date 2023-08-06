@@ -34,7 +34,7 @@ function Categories() {
         setBooks(data.items);
       });
   }, [])
-  
+
   return (
     <div className="App" >
     <Container  sx={{minHeight: '100vh'}}>
@@ -77,7 +77,7 @@ function Categories() {
           <Button onClick={() => dispatch(addCartItem({
             id: book.id, 
             name:book.volumeInfo.title || "", 
-            img:book.volumeInfo.imageLinks.thumbnail || "", 
+            img:book.volumeInfo.imageLinks?.thumbnail || "", 
             quantity:1, 
             price: book.volumeInfo.pageCount || "" }))} 
           size="small">Buy</Button>
