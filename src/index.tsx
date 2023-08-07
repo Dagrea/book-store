@@ -7,12 +7,12 @@ import reportWebVitals from './reportWebVitals';
 import ReactDOM from 'react-dom/client';
 import { createHashRouter, RouterProvider, Outlet} from "react-router-dom";
 
-import Root from './components/Root';
+import Root from './pages/Root';
 import Navbar from './components/Navbar';
-import BookCard from './components/BookCard';
-import About from './components/About';
+import BookCard from './pages/BookCard';
+import About from './pages/About';
 import Footer from './components/Footer';
-import Categories from './components/Categories';
+import Categories from './pages/Categories';
 
 import Container from '@mui/material/Container';
 import Skeleton from '@mui/material/Skeleton'; 

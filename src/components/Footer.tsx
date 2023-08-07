@@ -18,6 +18,40 @@ const theme = createTheme({
   },
 });
 
+interface linkBlock {
+  [key: string]: string;
+}
+
+interface Links {
+  'For clients': linkBlock;
+  Information: linkBlock;
+  Contacts: linkBlock;
+}
+
+const footerLinks: Links = {
+  'For clients': {
+    'Contact Us': '',
+    'FAQ (Frequently Asked Questions)': '',
+    'Terms of Service': '',
+    'Privacy Policy': '',
+    News: '',
+  },
+  Information: {
+    Сharity: '',
+    'Gift certificates': '',
+    Careers: '',
+    'Shipping Details': '',
+    'Return Policy and Refunds': '',
+  },
+  Contacts: {
+    '+38 (050) 640 89 35': '',
+    '+38 (067) 492 64 97': '',
+    '+38 (044) 378 00 37': '',
+    'Пн - Пт 10:00 - 20:00': '',
+    'Сб - Нд 10:00 - 18:00': '',
+  },
+};
+
 const Footer = () => (
   <ThemeProvider theme={theme}>
     <Paper
@@ -35,121 +69,43 @@ const Footer = () => (
     >
       <Container>
         <Grid container>
-          <Grid container item xs={3} spacing={1}>
-            <Grid container item xs={12}>
-              <Typography variant='h5' color='#427dff'>
-                For clients
-              </Typography>
-            </Grid>
-            <Grid container item xs={12}>
-              <Typography variant='body1' color='#fff'>
-                Contact Us
-              </Typography>
-            </Grid>
-            <Grid container item xs={12}>
-              <Typography variant='body1' color='#fff'>
-                FAQ (Frequently Asked Questions)
-              </Typography>
-            </Grid>
-            <Grid container item xs={12}>
-              <Typography variant='body1' color='#fff'>
-                Terms of Service
-              </Typography>
-            </Grid>
-            <Grid container item xs={12}>
-              <Typography variant='body1' color='#fff'>
-                Privacy Policy
-              </Typography>
-            </Grid>
-            <Grid container item xs={12}>
-              <Typography variant='body1' color='#fff'>
-                News
-              </Typography>
-            </Grid>
-          </Grid>
+          {Object.entries(footerLinks).map((item, i) => {
+            return (
+              <Grid container item xs={3} spacing={2} key={i}>
+                <Grid container item xs={12}>
+                  <Typography variant='h5' color='#427dff'>
+                    {Object.entries(footerLinks)[i][0]}
+                  </Typography>
+                </Grid>
+                {Object.keys(Object.entries(footerLinks)[i][1]).map((item, j) => (
+                  <Grid container item xs={12} key={j}>
+                    <Typography variant='body1' color='#fff'>
+                      {item}
+                    </Typography>
+                  </Grid>
+                ))}
+              </Grid>
+            );
+          })}
           <Grid container item xs={3} spacing={2}>
-            <Grid container item xs={12}>
-              <Typography variant='h5' color='#427dff'>
-                Information
-              </Typography>
-            </Grid>
-            <Grid container item xs={12}>
-              <Typography variant='body1' color='#fff'>
-                Сharity
-              </Typography>
-            </Grid>
-            <Grid container item xs={12}>
-              <Typography variant='body1' color='#fff'>
-                Gift certificates
-              </Typography>
-            </Grid>
-            <Grid container item xs={12}>
-              <Typography variant='body1' color='#fff'>
-                Careers
-              </Typography>
-            </Grid>
-            <Grid container item xs={12}>
-              <Typography variant='body1' color='#fff'>
-                Shipping Details
-              </Typography>
-            </Grid>
-            <Grid container item xs={12}>
-              <Typography variant='body1' color='#fff'>
-                Return Policy and Refunds
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid container item xs={3} spacing={2}>
-            <Grid container item xs={10}>
-              <Grid container item xs={12}>
-                <Typography variant='h5' color='#427dff'>
-                  Contacts
-                </Typography>
-              </Grid>
-              <Grid container item xs={12}>
-                <Typography variant='body1' color='#fff'>
-                  +38 (050) 640 89 35
-                </Typography>
-              </Grid>
-              <Grid container item xs={12}>
-                <Typography variant='body1' color='#fff'>
-                  +38 (067) 492 64 97
-                </Typography>
-              </Grid>
-              <Grid container item xs={12}>
-                <Typography variant='body1' color='#fff'>
-                  +38 (044) 378 00 37
-                </Typography>
-              </Grid>
-              <Grid container item xs={12}>
-                <Typography variant='body1' color='#fff'>
-                  Пн - Пт 10:00 - 20:00
-                </Typography>
-              </Grid>
-              <Grid container item xs={12}>
-                <Typography variant='body1' color='#fff'>
-                  Сб - Нд 10:00 - 18:00
-                </Typography>
-              </Grid>
-            </Grid>
             <Grid container item xs={2}>
               <Divider orientation='vertical' flexItem sx={{ borderColor: '#fff', minHeight: '100%' }} />
             </Grid>
-          </Grid>
-          <Grid container item xs={3} spacing={1} justifyContent='center'>
-            <Typography variant='h4' color='#fff'>
-              Newsletter
-            </Typography>
-            <TextField
-              id='filled-basic'
-              label='Enter your e-mail'
-              variant='filled'
-              fullWidth
-              sx={{ input: { backgroundColor: '#fff', fontSize: '15px' } }}
-            />
-            <Button variant='contained' size='medium' color='info' sx={{ width: '100%', height: '50px' }}>
-              Subscibe
-            </Button>
+            <Grid container item xs={10} spacing={1} justifyContent='center'>
+              <Typography variant='h4' color='#fff'>
+                Newsletter
+              </Typography>
+              <TextField
+                id='filled-basic'
+                label='Enter your e-mail'
+                variant='filled'
+                fullWidth
+                sx={{ input: { backgroundColor: '#fff', fontSize: '15px' } }}
+              />
+              <Button variant='contained' size='medium' color='info' sx={{ width: '100%', height: '50px' }}>
+                Subscibe
+              </Button>
+            </Grid>
           </Grid>
           <Grid container item xs={12} justifyContent='center' sx={{ marginTop: '50px' }}>
             <Divider sx={{ borderColor: '#fff', minHeight: '1px', minWidth: '100%' }} />

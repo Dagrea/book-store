@@ -12,4 +12,4 @@ Todo
  memorize
  types
 In Progress
- moduling / prettier
+ moduling 
