@@ -8,7 +8,7 @@ import ReactDOM from 'react-dom/client';
 import { createHashRouter, RouterProvider, Outlet} from "react-router-dom";
 
 import Root from './pages/Root';
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar/Navbar';
 import BookCard from './pages/BookCard';
 import About from './pages/About';
 import Footer from './components/Footer';
