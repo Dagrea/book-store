@@ -22,105 +22,28 @@ import carousel3 from '../assets/carousel3.jpg';
 import carousel4 from '../assets/carousel4.jpg';
 import carousel5 from '../assets/carousel5.jpg';
 
-import genre1 from '../assets/genre1.png';
-import genre2 from '../assets/genre2.png';
-import genre3 from '../assets/genre3.png';
-import genre4 from '../assets/genre4.png';
-import genre5 from '../assets/genre5.png';
-import findGenre from '../assets/findgenre.png';
+import {BOOKS_API} from '../utils/API/root';
+import {genres, gengeImages} from '../utils/services/genres';
+import {promotionCarouselImages} from '../utils/services/carousels';
 
-const BOOK_API = 'https://www.googleapis.com/books/v1/volumes?q=Garry&maxResults=12';
+import {blockCarouselData} from '../utils/helpers/carousel';
 
 function Root() {
   const [books, setBooks] = useState<any[]>([]);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    fetch(BOOK_API)
+    fetch(BOOKS_API)
       .then(res => res.json())
       .then(data => {
         setBooks(data.items);
       });
   }, []);
 
-  const carouselImages = [carousel1, carousel2, carousel3, carousel4, carousel5];
-  const gengeImages = [genre1, genre2, genre3, genre4, genre5];
-  const genres = [
-    {
-      name: 'dragon',
-      image: genre1,
-    },
-    {
-      name: 'detective',
-      image: genre2,
-    },
-    {
-      name: 'romantic',
-      image: genre3,
-    },
-    {
-      name: 'ninja',
-      image: genre4,
-    },
-    {
-      name: 'fantasy',
-      image: genre5,
-    },
-    {
-      name: 'Somethig else?',
-      image: findGenre,
-    },
-  ];
-
-  const sliderItems: number = books.length > 4 ? 4 : books.length;
-  const items: Array<any> = [];
-
-  for (let i = 0; i < books.length; i += sliderItems) {
-    if (i % sliderItems === 0) {
-      items.push(
-        <Grid container spacing={2} key={i}>
-          {books.slice(i, i + sliderItems).map((book, index) => (
-            <Grid key={index} {...{ xs: 12, sm: 6, md: 4, lg: 3 }} height={'570px'}>
-              <Card
-                sx={{ maxWidth: 345, minHeight: '100%', position: 'relative', boxShadow: 3 }}
-                variant='outlined'
-              >
-                {book.volumeInfo.imageLinks === undefined ? (
-                  <Skeleton variant='rounded' width={'auto'} height={400} />
-                ) : (
-                  <CardMedia
-                    sx={{ height: 400, backgroundSize: 'cover' }}
-                    image={book.volumeInfo.imageLinks.thumbnail}
-                    component={Link}
-                    to={'/card/' + ++index}
-                  />
-                )}
-                <CardContent>
-                  <Typography
-                    variant='body1'
-                    component={Link}
-                    to={'/card/' + ++index}
-                    sx={{ textDecoration: 'none', color: 'inherit' }}
-                  >
-                    {book.volumeInfo.title}
-                  </Typography>
-                  <Grid container justifyContent='center'>
-                    <Chip label='500 uah' variant='outlined' sx={{ m: '10px', fontSize: '16px' }} />
-                    <Chip label='aviable' color='success' sx={{ m: '10px', fontSize: '16px' }} />
-                  </Grid>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      );
-    }
-  }
-
   return (
     <div className='App'>
       <Container maxWidth='xl' sx={{ minHeight: '100vh' }}>
         <Carousel>
-          {carouselImages.map((item, i) => (
+          {promotionCarouselImages.map((item, i) => (
             <CardMedia sx={{ height: 450, backgroundSize: 'cover' }} image={item} key={i} />
           ))}
         </Carousel>
@@ -135,7 +58,7 @@ function Root() {
           height={570}
           sx={{ margin: '50px' }}
         >
-          {items}
+          {books ? blockCarouselData(books) : []}
         </Carousel>
         <Paper sx={{ minWidth: '100%', minHeight: '600px', backgroundColor: '#000' }}>
           <Typography variant='body1' align='left' color='#fff' sx={{ fontSize: '36px', padding: '30px' }}>

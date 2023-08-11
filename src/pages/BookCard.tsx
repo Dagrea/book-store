@@ -23,6 +23,9 @@ import AddCardSharpIcon from '@mui/icons-material/AddCardSharp';
 import Carousel from 'react-material-ui-carousel';
 import Zoom from 'react-img-zoom';
 
+import { RECOMMENDED_BOOK_API, POPULAR_BOOK_API } from '../utils/API/root';
+import { blockCarouselData } from '../utils/helpers/carousel';
+
 import mockImage1 from '../assets/carousel1.jpg';
 import mockImage2 from '../assets/carousel2.jpg';
 import mockImage3 from '../assets/carousel3.jpg';
@@ -37,10 +40,6 @@ const anArrayOfNumbers = [
   <img style={{ height: 60, padding: 10, backgroundSize: 'cover' }} src={mockImage2} />,
   <img style={{ height: 60, padding: 10, backgroundSize: 'cover' }} src={mockImage3} />,
 ];
-
-const RECOMMENDED_BOOK_API =
-  'https://www.googleapis.com/books/v1/volumes?q=Garry&maxResults=12&startIndex=21';
-const POPULAR_BOOK_API = 'https://www.googleapis.com/books/v1/volumes?q=Garry&maxResults=12&startIndex=41';
 
 function BookCard() {
   const favorite = useAppSelector(state => state.favorite);
@@ -65,78 +64,6 @@ function BookCard() {
         setPopulardBooks(data.items);
       });
   }, []);
-
-  const rsliderItems: number = recommendedBooks.length > 4 ? 4 : recommendedBooks.length;
-  const ritems: Array<any> = [];
-
-  for (let i = 0; i < recommendedBooks.length; i += rsliderItems) {
-    if (i % rsliderItems === 0) {
-      ritems.push(
-        <Grid container spacing={2} key={i}>
-          {recommendedBooks.slice(i, i + rsliderItems).map((book, index) => (
-            <Grid key={index} {...{ xs: 12, sm: 6, md: 4, lg: 3 }} height={'570px'}>
-              <Card
-                sx={{ maxWidth: 345, minHeight: '100%', position: 'relative', boxShadow: 3 }}
-                variant='outlined'
-              >
-                {book.volumeInfo.imageLinks === undefined ? (
-                  <Skeleton variant='rounded' width={'auto'} height={400} />
-                ) : (
-                  <CardMedia
-                    sx={{ height: 400, backgroundSize: 'cover' }}
-                    image={book.volumeInfo.imageLinks.thumbnail}
-                  />
-                )}
-                <CardContent>
-                  <Typography gutterBottom variant='body1' component='div'>
-                    {book.volumeInfo.title}
-                  </Typography>
-                  <Chip label='500 uah' variant='outlined' />
-                  <Chip label='aviable' color='success' sx={{ marginLeft: '10px', marginRight: '10px' }} />
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      );
-    }
-  }
-
-  const psliderItems: number = populardBooks.length > 4 ? 4 : populardBooks.length;
-  const pitems: Array<any> = [];
-
-  for (let i = 0; i < populardBooks.length; i += psliderItems) {
-    if (i % psliderItems === 0) {
-      pitems.push(
-        <Grid container spacing={2} key={i}>
-          {populardBooks.slice(i, i + psliderItems).map((book, index) => (
-            <Grid key={index} {...{ xs: 12, sm: 6, md: 4, lg: 3 }} height={'570px'}>
-              <Card
-                sx={{ maxWidth: 345, minHeight: '100%', position: 'relative', boxShadow: 3 }}
-                variant='outlined'
-              >
-                {book.volumeInfo.imageLinks === undefined ? (
-                  <Skeleton variant='rounded' width={'auto'} height={400} />
-                ) : (
-                  <CardMedia
-                    sx={{ height: 400, backgroundSize: 'cover' }}
-                    image={book.volumeInfo.imageLinks.thumbnail}
-                  />
-                )}
-                <CardContent>
-                  <Typography gutterBottom variant='body1' component='div'>
-                    {book.volumeInfo.title}
-                  </Typography>
-                  <Chip label='500 uah' variant='outlined' />
-                  <Chip label='aviable' color='success' sx={{ marginLeft: '10px', marginRight: '10px' }} />
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      );
-    }
-  }
 
   return (
     <div>
@@ -299,7 +226,7 @@ function BookCard() {
           height={570}
           sx={{ margin: '50px' }}
         >
-          {ritems}
+          {recommendedBooks ? blockCarouselData(recommendedBooks) : []}
         </Carousel>
         <Typography align='center' gutterBottom variant='h3' component='div' sx={{ marginTop: '50px' }}>
           Popular books
@@ -312,7 +239,7 @@ function BookCard() {
           height={570}
           sx={{ margin: '50px' }}
         >
-          {pitems}
+          {recommendedBooks ? blockCarouselData(populardBooks) : []}
         </Carousel>
       </Container>
     </div>
