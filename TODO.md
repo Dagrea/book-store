@@ -1,7 +1,6 @@
 Book Store
 Book store on React + Redux
 Todo
- acoount
  change api to storerestapi.com
  jws
  filter | search | pages on categories
@@ -11,5 +10,9 @@ Todo
  styled components
  memorize
  types
+ server node
+ mongodb
+ password recover
+ docker
 In Progress
- moduling 
+ acoount

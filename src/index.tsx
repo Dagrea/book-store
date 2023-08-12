@@ -13,6 +13,7 @@ import BookCard from './pages/BookCard';
 import About from './pages/About';
 import Footer from './components/Footer';
 import Categories from './pages/Categories';
+import Registration from './pages/User/Registration';
 
 import Container from '@mui/material/Container';
 import Skeleton from '@mui/material/Skeleton'; 
@@ -52,6 +53,14 @@ const router = createHashRouter([
       {
         path: '/card/:cardId',
         element: <BookCard/>
+      },
+      {
+        path: '/registration',
+        element: <Registration/>
+      },
+      {
+        path: '/account',
+        element: <Registration/>
       }
     ]
   }
